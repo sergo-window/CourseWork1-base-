@@ -13,8 +13,14 @@ public class Main {
         employees[7] = new Employee("Владимирова Влада Владимировна", 4, 97000);
         employees[8] = new Employee("Сергеев Сергей Сергеевич", 5, 57000);
         employees[9] = new Employee("Тихонов Тихон Тихонович", 5, 79000);
-        for (Employee employee : employees) {
-            System.out.println(employee);
+        {
+            double indexSalary;
+            double indexPercent = 10;
+            for (Employee employee : employees) {
+                indexSalary = employee.getSalary() + employee.getSalary() * indexPercent / 100;
+                employee.setSalary((int) indexSalary);
+                System.out.println(employee);
+            }
         }
         System.out.println("Общая сумма затрат на зарплату " + calculateSumSalary() + " в месяц");
         System.out.println("Сотрудник с минимальной зарплатой: " + findEmployeeWithMinSalary());
@@ -24,8 +30,8 @@ public class Main {
         printFullNames();
     }
 
-    private static int calculateSumSalary() {
-        int sum = 0;
+    private static double calculateSumSalary() {
+        double sum = 0;
         for (Employee employee : employees) {
             sum += employee.getSalary();
         }
@@ -53,7 +59,7 @@ public class Main {
     }
 
     private static double calculateAverageSalary() {
-        return (double) calculateSumSalary() / employees.length;
+        return calculateSumSalary() / employees.length;
     }
 
     private static void printFullNames() {
