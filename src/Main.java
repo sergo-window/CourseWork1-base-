@@ -28,6 +28,14 @@ public class Main {
         System.out.println("Средняя зарплата сотрудников: " + calculateAverageSalary());
         System.out.println("Ф.И.О. сотрудников:");
         printFullNames();
+        findEmployeeWithMinSalaryInDepartment(3);
+        findEmployeeWithMaxSalaryInDepartment(3);
+        calculateSumSalaryInDepartment(3);
+        calculateAverageSalaryInDepartment(3);
+        indexingSalaryInDepartment(3, 10);
+        printEmployeesInDepartment(3);
+        printEmployeesWithSmallSalary(70000);
+        printEmployeesWithBigSalary(70000);
     }
 
     private static double calculateSumSalary() {
@@ -65,6 +73,102 @@ public class Main {
     private static void printFullNames() {
         for (Employee employee : employees) {
             System.out.println(employee.getFullName());
+        }
+    }
+
+    private static void findEmployeeWithMinSalaryInDepartment(int departmentNumber) {
+        Employee employeeWithMinSalaryInDepartment = null;
+        for (Employee employee : employees) {
+            if (employee != null && employee.getDepartment() == departmentNumber) {
+                if (employeeWithMinSalaryInDepartment == null || employee.getSalary() < employeeWithMinSalaryInDepartment.getSalary()) {
+                    employeeWithMinSalaryInDepartment = employee;
+                }
+            }
+        }
+        if (employeeWithMinSalaryInDepartment != null) {
+            System.out.println("Сотрудник с минимальной зарплатой в отделе " + departmentNumber + ": " + employeeWithMinSalaryInDepartment.getFullName() +
+                    ", зарплата " + employeeWithMinSalaryInDepartment.getSalary() + " руб.");
+        } else {
+            System.out.println("В отделе " + departmentNumber + " нет сотрудников.");
+        }
+    }
+
+    private static void findEmployeeWithMaxSalaryInDepartment(int departmentNumber) {
+        Employee employeeWithMaxSalaryInDepartment = null;
+        for (Employee employee : employees) {
+            if (employee != null && employee.getDepartment() == departmentNumber) {
+                if (employeeWithMaxSalaryInDepartment == null || employee.getSalary() > employeeWithMaxSalaryInDepartment.getSalary()) {
+                    employeeWithMaxSalaryInDepartment = employee;
+                }
+            }
+        }
+        if (employeeWithMaxSalaryInDepartment != null) {
+            System.out.println("Сотрудник с максимальной зарплатой в отделе " + departmentNumber + ": " + employeeWithMaxSalaryInDepartment.getFullName() +
+                    ", зарплата " + employeeWithMaxSalaryInDepartment.getSalary() + " руб.");
+        } else {
+            System.out.println("В отделе " + departmentNumber + " нет сотрудников.");
+        }
+    }
+
+    private static void calculateSumSalaryInDepartment(int departmentNumber) {
+        int sum = 0;
+        for (Employee employee : employees) {
+            if (employee != null && employee.getDepartment() == departmentNumber) {
+                sum += employee.getSalary();
+            }
+        }
+        System.out.println("Сумма затрат на зарплату по отделу " + departmentNumber + " составляет: " + sum + " руб. в месяц");
+    }
+
+    private static void calculateAverageSalaryInDepartment(int departmentNumber) {
+        int sum = 0;
+        int count = 0;
+        for (Employee employee : employees) {
+            if (employee != null && employee.getDepartment() == departmentNumber) {
+                sum += employee.getSalary();
+                count++;
+            }
+        }
+        double averageSalary = count > 0 ? (double) sum / count : 0;
+        System.out.println("Средняя зарплата по отделу " + departmentNumber + " составляет: " + averageSalary + " руб. в месяц");
+        System.out.println("Количество сотрудников в отделе " + departmentNumber + " составляет: " + count + " человека");
+    }
+
+    private static void indexingSalaryInDepartment(int departmentNumber, double percent) {
+        System.out.println("Зарплата сотрудников отдела " + departmentNumber + " после индексации на " + percent + " %:");
+        for (Employee employee : employees) {
+            if (employee != null && employee.getDepartment() == departmentNumber) {
+                double indexingSalary = employee.getSalary() + employee.getSalary() * percent / 100;
+                employee.setSalary((int) indexingSalary);
+                System.out.println(employee.getFullName() + ": " + (int) indexingSalary + " руб.");
+            }
+        }
+    }
+
+    private static void printEmployeesInDepartment(int departmentNumber) {
+        System.out.println("Сотрудники отдела " + departmentNumber + ":");
+        for (Employee employee : employees) {
+            if (employee != null && employee.getDepartment() == departmentNumber) {
+                System.out.println(employee.toStringWithoutDepartment());
+            }
+        }
+    }
+
+    private static void printEmployeesWithSmallSalary(int criterionSalary) {
+        System.out.println("Сотрудникии с зарплатой меньше " + criterionSalary + ":");
+        for (Employee employee : employees) {
+            if (employee != null && employee.getSalary() < criterionSalary) {
+                System.out.println(employee.toStringWithoutDepartment());
+            }
+        }
+    }
+
+    private static void printEmployeesWithBigSalary(int criterionSalary) {
+        System.out.println("Сотрудникии с зарплатой больше " + criterionSalary + ":");
+        for (Employee employee : employees) {
+            if (employee != null && employee.getSalary() >= criterionSalary) {
+                System.out.println(employee.toStringWithoutDepartment());
+            }
         }
     }
 }

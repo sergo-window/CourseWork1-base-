@@ -53,4 +53,9 @@ public class Employee {
                 ", зарплата " + salary +
                 ", id=" + id;
     }
+    public String toStringWithoutDepartment() {
+        return fullName +
+                ", зарплата " + salary +
+                ", id=" + id;
+    }
 }
