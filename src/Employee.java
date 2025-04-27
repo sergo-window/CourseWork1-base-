@@ -3,7 +3,7 @@ import java.util.Objects;
 public class Employee {
     private final String fullName;
     private int department;
-    private int salary;
+    private double salary;
     private final int id;
     private static int counter = 1;
 
@@ -23,7 +23,7 @@ public class Employee {
     }
 
     public int getSalary() {
-        return salary;
+        return (int) salary;
     }
 
     public void setDepartment(int department) {
@@ -50,6 +50,11 @@ public class Employee {
     public String toString() {
         return fullName +
                 ", отдел " + department +
+                ", зарплата " + salary +
+                ", id=" + id;
+    }
+    public String toStringWithoutDepartment() {
+        return fullName +
                 ", зарплата " + salary +
                 ", id=" + id;
     }
