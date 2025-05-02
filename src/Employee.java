@@ -34,6 +34,10 @@ public class Employee {
         this.salary = salary;
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
